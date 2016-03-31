@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+   <data>
+
+        <import type="android.view.View" />
+
+        <import type="joel.duet.symphone.model.Default" />
+
+        <variable
+            name="user"
+            type="joel.duet.symphone.MainActivity.User" />
+    </data>
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="@{user.views[Default.INDEX_OPTIONS].get() ? View.VISIBLE : View.INVISIBLE}">
+
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/quarter_image_label"
+                android:src="@drawable/ic_4th_note" />
+
+            <EditText
+                android:id="@+id/options_tempo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="numberDecimal" />
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/options_score_file"
+                android:textAppearance="?android:attr/textAppearanceSmall" />
+
+            <EditText
+                android:id="@+id/options_directory"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                android:text="@string/default_directory" />
+        </TableRow>
+
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="@string/tonal_mode_label"
+                android:id="@+id/tonal_mode_label"
+                android:layout_column="0" />
+
+            <ToggleButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/minor_tonal_label"
+                android:textOn="major"
+                android:textOff="minor"
+                android:id="@+id/tonal_mode"
+                android:layout_column="1" />
+        </TableRow>
+    </TableLayout>
+</layout>

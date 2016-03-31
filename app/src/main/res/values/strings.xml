@@ -1,0 +1,85 @@
+<resources>
+    <string name="app_name">Symphone</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+    <string name="drawer_icon">drawer_icon</string>
+    <string name="live_label">Live</string>
+    <string name="patchbay_label">Patchbay</string>
+    <string name="orchestra_label">Orchestra</string>
+    <string name="preferences_label">Preferences</string>
+    <string name="options_label">Project</string>
+    <string name="fx_label">FX</string>
+    <string name="score_label">Score</string>
+    <string name="master_label">Master</string>
+    <string name="material_label">Material</string>
+    <string name="subtitle_drawer">Musica</string>
+    <string name="oct_label">oct:</string>
+    <string name="play_label">Play</string>
+    <string name="record_label">Record</string>
+    <string name="instr_label">instr:</string>
+    <string name="dialog_hint_label">initial uppercase then lowercase</string>
+    <string name="new_instr_button_label">New Instrument</string>
+    <string name="import_instr_button_label">Import Instrument</string>
+    <string name="delete_instr_label">Delete</string>
+    <string name="add_to_lib_label">Add to lib</string>
+    <string name="endin">endin</string>
+
+    <string name="instr_title">instr %1$s</string>
+    <string name="effect_title">opcode %1$s, aa, aa</string>
+    <string name="floating_point_format">%1$s</string>
+    <string name="master_line_L_format">%1$s_L</string>
+    <string name="master_line_R_format">%1$s_R</string>
+
+    <string name="pattern_title">track %1$s pattern %2$s</string>
+    <string name="endop">endop</string>
+    <string name="new_effect_button_label">New effect</string>
+    <string name="import_effect_button_label">Import effect</string>
+    <string name="delete_effect_button_label">delete</string>
+    <string name="add_to_fx_lib_button_label">Add to Lib</string>
+    <string name="new_track_label">New Track</string>
+    <string name="extend_score_label">Extend Score</string>
+    <string name="trim_score_label">Trim Score</string>
+    <string name="play_button_label">Play</string>
+    <string name="stop_button_label">Stop</string>
+    <string name="preview_button_label">Preview</string>
+    <string name="play_in_context_button_label">Play in context</string>
+    <string name="welcome_screen_description">Welcome Screen</string>
+    <string name="done_button_label">Done</string>
+    <string name="patternize_label">Patternize</string>
+    <string name="open_project_label">Open</string>
+    <string name="new_project_label">New</string>
+    <string name="save_project_label">Save</string>
+    <string name="general_options_label">General</string>
+    <string name="recenter_button_label">Recenter</string>
+    <string name="loudness_label">Loudness</string>
+    <string name="dialog_open">Open:</string>
+    <string name="dialog_save">Save As:</string>
+    <string name="dialog_folder">Folder Select:</string>
+    <string name="new_folder_label">New Folder</string>
+    <string name="options_score_file">temporary directory</string>
+    <string name="quarter_image_label">image of a quarter</string>
+    <string name="default_directory">/storage/scard0/</string>
+    <string name="lab_label">lab_label</string>
+    <string name="render_project_label">CSD</string>
+    <string name="tonal_mode_label">Tonal mode</string>
+    <string name="minor_tonal_label">minor</string>
+    <string name="cancel_button_label">CANCEL</string>
+    <string name="ok_button_label">OK</string>
+    <string-array name="oct_array">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+        <item>11</item>
+    </string-array>
+
+</resources>

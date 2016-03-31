@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <import type="android.graphics.Color" />
+
+        <variable
+            name="user"
+            type="joel.duet.symphone.MainActivity.User" />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <HorizontalScrollView
+            android:id="@+id/menu_item"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true">
+
+            <ListView
+                android:id="@+id/list_item"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent" />
+        </HorizontalScrollView>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_toEndOf="@id/menu_item"
+            android:layout_toRightOf="@id/menu_item">
+
+            <include
+                android:id="@+id/welcome"
+                layout="@layout/welcome"
+                app:user="@{user}" />
+
+            <include
+                android:id="@+id/orchestra"
+                layout="@layout/orchestra"
+                app:user="@{user}" />
+
+            <include
+                android:id="@+id/instrument_name_provider"
+                layout="@layout/instrument_name_provider"
+                app:user="@{user}" />
+
+            <include
+                android:id="@+id/instrument"
+                layout="@layout/instrument"
+                app:user="@{user}" />
+
+            <include
+                android:id="@+id/patchbay"
+                layout="@layout/patchbay"
+                app:user="@{user}"/>
+
+            <include
+                android:id="@+id/master"
+                layout="@layout/master"
+                app:user="@{user}"/>
+
+            <include
+                android:id="@+id/options"
+                layout="@layout/options"
+                app:user="@{user}"/>
+
+            <include
+                android:id="@+id/live"
+                layout="@layout/live"
+                app:user="@{user}"/>
+
+            <include
+                android:id="@+id/fx"
+                layout="@layout/fx"
+                app:user="@{user}" />
+
+        </FrameLayout>
+    </RelativeLayout>
+
+</layout>

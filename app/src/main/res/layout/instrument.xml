@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<data>
+
+        <import type="android.view.View" />
+    <import type="joel.duet.symphone.model.Default"/>
+    <import type="joel.duet.symphone.model.CSD"/>
+
+    <variable
+            name="user"
+            type="joel.duet.symphone.MainActivity.User" />
+    </data>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:id="@+id/layout"
+        android:visibility="@{user.views[Default.INDEX_INSTRUMENT].get() ? View.VISIBLE : View.INVISIBLE}">
+
+        <TextView
+            android:id="@+id/instrumentName"
+            android:text="@{CSD.formatInstrumentHeader(user.currentInstrument)}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:typeface="monospace" />
+
+        <EditText
+            android:id="@+id/instrumentCode"
+            android:text="@{user.currentInstrumentCode}"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="top|start"
+            android:inputType="text|textMultiLine|textNoSuggestions"
+            android:typeface="monospace" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/endin"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:typeface="monospace" />
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:id="@+id/delete_instr"
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="@string/delete_instr_label" />
+
+            <Button
+                android:id="@+id/add_to_instr_lib"
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="@string/add_to_lib_label" />
+        </TableRow>
+
+    </LinearLayout>
+</layout>

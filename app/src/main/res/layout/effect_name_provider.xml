@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+<data>
+
+    <import type="android.view.View" />
+
+    <import type="joel.duet.symphone.model.Default" />
+
+    <variable
+        name="user"
+        type="joel.duet.symphone.MainActivity.User" />
+</data>
+
+<LinearLayout
+    android:id="@+id/layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:visibility="@{user.views[Default.INDEX_GIVE_EFFECT_NAME].get() ? View.VISIBLE : View.INVISIBLE}"
+    android:weightSum="1">
+
+
+    <EditText
+        android:id="@+id/name_edited"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:hint="@string/dialog_hint_label"
+        android:imeOptions="actionDone"
+        android:inputType="text"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/cancel_button"
+            style="?android:attr/buttonBarButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/cancel_button_label" />
+
+        <Button
+            android:id="@+id/ok_button"
+            style="?android:attr/buttonBarButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/ok_button_label" />
+    </LinearLayout>
+</LinearLayout>
+</layout>
