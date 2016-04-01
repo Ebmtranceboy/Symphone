@@ -12,7 +12,6 @@ import joel.duet.symphone.MainActivity;
 import joel.duet.symphone.model.CSD;
 import joel.duet.symphone.model.Default;
 import joel.duet.symphone.model.Matrix;
-import joel.duet.symphone.model.PreferenceManager;
 
 /**
  *
@@ -27,7 +26,6 @@ public class Orchestra {
             @Override
             public void onClick(View view) {
                 user.setCurrentViewIndex(Default.INDEX_GIVE_INSTRUMENT_NAME);
-
             }
         });
 
@@ -37,10 +35,6 @@ public class Orchestra {
                 user.setCurrentViewIndex(Default.INDEX_ORCHESTRA);
             }
         });
-
-        PreferenceManager.getInstance().initialize(user.activity);
-        Matrix.getInstance().update();
-        //Log.i(TAG, "null cells");
 
         final List<String> listInstr = new ArrayList<>();
         final ArrayAdapter<String> instr_adapter = new ArrayAdapter<>(user.activity,
@@ -58,7 +52,7 @@ public class Orchestra {
                 Matrix.getInstance().update();
                 PatchBay.reinit(user);
                 Master.reinit(user);
-                Live.reinit(user);
+
                 listInstr.add(instrName);
                 instr_adapter.notifyDataSetChanged();
 

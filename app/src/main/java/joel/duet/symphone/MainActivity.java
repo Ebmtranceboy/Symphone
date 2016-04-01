@@ -13,6 +13,8 @@ import android.widget.ListView;
 
 import com.csounds.CsoundObj;
 
+import joel.duet.symphone.controller.Effect;
+import joel.duet.symphone.controller.Fx;
 import joel.duet.symphone.controller.Live;
 import joel.duet.symphone.controller.Master;
 import joel.duet.symphone.controller.Options;
@@ -21,6 +23,8 @@ import joel.duet.symphone.controller.PatchBay;
 import joel.duet.symphone.databinding.ActivityMainBinding;
 import joel.duet.symphone.model.Default;
 import joel.duet.symphone.controller.Instrument;
+import joel.duet.symphone.model.Matrix;
+import joel.duet.symphone.model.PreferenceManager;
 
 public class MainActivity extends AppCompatActivity {
     //private static final String TAG = "MainActivity";
@@ -33,6 +37,8 @@ public class MainActivity extends AppCompatActivity {
         public ObservableBoolean views[] = new ObservableBoolean[Default.nViews];
         public ObservableField<String> currentInstrument = new ObservableField<>();
         public ObservableField<String> currentInstrumentCode = new ObservableField<>();
+        public ObservableField<String> currentEffect = new ObservableField<>();
+        public ObservableField<String> currentEffectCode = new ObservableField<>();
         public ObservableBoolean pianoMode = new ObservableBoolean();
         public ObservableBoolean loudnessMode = new ObservableBoolean();
         public ObservableBoolean polyphonicMode = new ObservableBoolean();
@@ -78,9 +84,13 @@ public class MainActivity extends AppCompatActivity {
         menu.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                if (i == Default.INDEX_LIVE) Live.reinit(user);
                 user.setCurrentViewIndex(i);
             }
         });
+
+        PreferenceManager.getInstance().initialize(this);
+        Matrix.getInstance().update();
 
         user.setCurrentViewIndex(Default.INDEX_WELCOME);
         user.pianoMode.set(true);
@@ -94,6 +104,7 @@ public class MainActivity extends AppCompatActivity {
         Master.reinit(user);
         Options.reinit(user);
         Live.reinit(user);
+        Fx.reinit(user);
     }
 
     @Override
@@ -104,6 +115,7 @@ public class MainActivity extends AppCompatActivity {
             user.setCurrentViewIndex(Default.INDEX_ORCHESTRA);
 
         } else if (user.getCurrentViewIndex() == Default.INDEX_EFFECT) {
+            Effect.updateModel(user);
             user.setCurrentViewIndex(Default.INDEX_FX);
 
         } else if (user.getCurrentViewIndex() == Default.INDEX_PATTERN) {

@@ -17,7 +17,7 @@
         android:visibility="@{user.views[Default.INDEX_FX].get() ? View.VISIBLE : View.INVISIBLE}">
 
         <ListView
-            android:id="@+id/listEffect"
+            android:id="@+id/listEffectView"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1" />
@@ -28,7 +28,7 @@
             android:layout_weight="0">
 
             <Button
-                android:id="@+id/new_effect"
+                android:id="@+id/new_effect_button"
                 style="?android:attr/buttonBarButtonStyle"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
@@ -36,7 +36,7 @@
                 android:text="@string/new_effect_button_label" />
 
             <Button
-                android:id="@+id/import_effect"
+                android:id="@+id/import_effect_button"
                 style="?android:attr/buttonBarButtonStyle"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"

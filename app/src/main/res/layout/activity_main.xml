@@ -79,6 +79,16 @@
                 layout="@layout/fx"
                 app:user="@{user}" />
 
+            <include
+                android:id="@+id/effect_name_provider"
+                layout="@layout/effect_name_provider"
+                app:user="@{user}" />
+
+            <include
+                android:id="@+id/effect"
+                layout="@layout/effect"
+                app:user="@{user}" />
+
         </FrameLayout>
     </RelativeLayout>
 

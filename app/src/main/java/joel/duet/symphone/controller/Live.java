@@ -1,5 +1,6 @@
 package joel.duet.symphone.controller;
 
+//import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -31,6 +32,8 @@ import joel.duet.symphone.modelview.KeyboardView;
  * Created by joel on 31/03/16 at 22:48 at 23:46.
  */
 public class Live {
+    //private static final String TAG = "Live";
+
     static private MainActivity activity;
     static private CsoundObj csoundObj;
     static private KeyboardView keyboard;
@@ -64,8 +67,11 @@ public class Live {
         csoundObj.addBinding(new CsoundSliderBinding(ktrly, "ktrly", 0, 1));
 //        csoundObj.addBinding(new CsoundButtonBinding(button1, "button1", 1));
     }
-
     public static void reinit(final MainActivity.User user) {
+        if(CSD.instruments.size()>0) doReinit(user);
+    }
+
+    public static void doReinit(final MainActivity.User user) {
         activity = user.activity;
         csoundObj = MainActivity.csoundObj;
         csoundObj.stop();

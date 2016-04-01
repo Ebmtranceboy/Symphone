@@ -99,6 +99,11 @@ public final class CSD {
         return String.format("instr %1$s", instrName);
     }
 
+    @SuppressWarnings("unused")
+    public static String formatEffectHeader(String effectName){
+        return String.format("opcode %1$s, aa, aa", effectName);
+    }
+
     private static class Snippet {
         final String name;
         int narg;
