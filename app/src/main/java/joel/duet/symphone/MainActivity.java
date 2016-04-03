@@ -31,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
     final User user = new User();
     public static CsoundObj csoundObj = new CsoundObj(false, true);
     public final CsoundUtil csoundUtil = new CsoundUtil(this);
+    public static Runnable sensible_code;
 
     public class User {
         public ObservableInt currentViewIndex = new ObservableInt();
@@ -100,11 +101,13 @@ public class MainActivity extends AppCompatActivity {
         user.isMajor.set(false);
 
         Orchestra.reinit(user);
+        Instrument.reinit(user);
         PatchBay.reinit(user);
         Master.reinit(user);
         Options.reinit(user);
         Live.reinit(user);
         Fx.reinit(user);
+        Effect.reinit(user);
     }
 
     @Override

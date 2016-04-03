@@ -8,4 +8,10 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="csoundAlertDialogStyle" parent="@android:style/Theme.Dialog">
+        <item name="android:textSize">20sp</item>
+        <item name="android:dividerHeight">0dp</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
 </resources>
