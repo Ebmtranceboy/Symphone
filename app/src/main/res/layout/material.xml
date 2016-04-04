@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<data>
+
+    <import type="android.view.View" />
+    <import type="joel.duet.symphone.model.Default"/>
+    <import type="joel.duet.symphone.model.CSD"/>
+
+    <variable
+            name="user"
+            type="joel.duet.symphone.MainActivity.User" />
+    </data>
+
+    <EditText
+        android:id="@+id/material"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:inputType="text|textMultiLine|textNoSuggestions"
+        android:typeface="monospace"
+        android:visibility="@{user.views[Default.INDEX_MATERIAL].get() ? View.VISIBLE : View.INVISIBLE}">
+
+    </EditText>
+</layout>

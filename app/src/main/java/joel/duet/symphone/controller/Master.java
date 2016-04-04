@@ -22,7 +22,7 @@ import joel.duet.symphone.model.Default;
  * Created by joel on 31/03/16 at 19:47 at 20:14.
  */
 public class Master {
-    private static CsoundObj csoundObj = MainActivity.csoundObj;
+    private static CsoundObj csoundObj;
     private static MainActivity activity;
 
     private static void registerLine(LayoutInflater inflater,
@@ -74,6 +74,7 @@ public class Master {
     }
 
     public static void reinit(final MainActivity.User user){
+        csoundObj = MainActivity.csoundObj;
         activity = user.activity;
 
         MasterBinding binding = user.binding.master;

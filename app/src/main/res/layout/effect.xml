@@ -15,7 +15,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-       android:visibility="@{user.views[Default.INDEX_EFFECT].get() ? View.VISIBLE : View.INVISIBLE}">
+        android:visibility="@{user.views[Default.INDEX_EFFECT].get() ? View.VISIBLE : View.INVISIBLE}">
 
         <TextView
             android:id="@+id/effectName"

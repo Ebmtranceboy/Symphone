@@ -89,6 +89,11 @@
                 layout="@layout/effect"
                 app:user="@{user}" />
 
+            <include
+                android:id="@+id/material"
+                layout="@layout/material"
+                app:user="@{user}" />
+
         </FrameLayout>
     </RelativeLayout>
 

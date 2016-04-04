@@ -68,6 +68,7 @@
     <string name="minor_tonal_label">minor</string>
     <string name="cancel_button_label">CANCEL</string>
     <string name="ok_button_label">OK</string>
+    <string name="reset_csound_label">Reset Csound Engine</string>
     <string-array name="oct_array">
         <item>1</item>
         <item>2</item>
