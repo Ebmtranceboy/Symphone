@@ -1,7 +1,7 @@
 package joel.duet.symphone.modelview;
 
 import android.content.Context;
-import android.databinding.ObservableBoolean;
+import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.LinearGradient;
@@ -19,6 +19,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
+import joel.duet.symphone.R;
 import joel.duet.symphone.model.CSD;
 import joel.duet.symphone.model.Default;
 import joel.duet.symphone.model.Pattern;
@@ -38,12 +39,7 @@ public final class ScoreView extends View {
     private static final float[] coords = new float[2];
     private static final Matrix mMatrix = new Matrix();
     private static final Matrix mInverse = new Matrix();
-
-    public static class User{
-        public final ObservableBoolean edit_mode = new ObservableBoolean();
-    }
-
-    public static final User user = new User();
+    boolean scoreEditMode;
 
     public static Tool tool;
     private static int bar_begin = -1;
@@ -77,8 +73,25 @@ public final class ScoreView extends View {
 
 	public ScoreView(Context context, AttributeSet attrs) {
 		super(context, attrs);
+        TypedArray a = context.getTheme().obtainStyledAttributes(
+                attrs,
+                R.styleable.joel_duet_symphone_modelview_ScoreView,
+                0, 0);
+
+        try {
+            scoreEditMode = a.getBoolean(R.styleable.joel_duet_symphone_modelview_ScoreView_scoreEditMode, false);
+        } finally {
+            a.recycle();
+        }
 		init(context);
 	}
+
+    @SuppressWarnings("unused")
+    public void setScoreEditMode(boolean b) {
+        scoreEditMode = b;
+        invalidate();
+        requestLayout();
+    }
 
 	public ScoreView(Context context, AttributeSet attrs, int defStyleAttr) {
 		super(context, attrs, defStyleAttr);
@@ -236,7 +249,7 @@ public final class ScoreView extends View {
             for (int p = 1; p <= track.getNbOfPatterns(); p++) {
                 Track.setPatternSelected(p);
                 final Pattern pattern = Track.getPatternSelected();
-                final boolean showFocus = user.edit_mode.get()
+                final boolean showFocus = scoreEditMode
                         && track == Focus.track
                         && pattern == Focus.pattern
                         && (tool == Tool.NONE || tool == Tool.MOVE || tool == Tool.COPY);
@@ -343,7 +356,7 @@ public final class ScoreView extends View {
                 coords[1] = y;
                 mInverse.mapPoints(coords);
 
-                if (user.edit_mode.get() && Score.getNbOfTracks() > 0) {
+                if (scoreEditMode && Score.getNbOfTracks() > 0) {
                     Focus.save();
                     insertion_track = closestY(coords[1]);
                     Score.setTrackSelected(insertion_track);
@@ -499,7 +512,7 @@ public final class ScoreView extends View {
                     final float dx = x - mLastTouchX;
                     final float dy = y - mLastTouchY;
 
-                    if (!user.edit_mode.get()) {
+                    if (!scoreEditMode) {
                         mPosX += dx / mScaleFactorX;
                         mPosY += dy / mScaleFactorY;
                     } else {

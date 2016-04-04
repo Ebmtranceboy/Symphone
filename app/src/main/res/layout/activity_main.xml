@@ -94,6 +94,11 @@
                 layout="@layout/material"
                 app:user="@{user}" />
 
+            <include
+                android:id="@+id/score"
+                layout="@layout/score"
+                app:user="@{user}" />
+
         </FrameLayout>
     </RelativeLayout>
 

@@ -23,6 +23,7 @@ import joel.duet.symphone.controller.Material;
 import joel.duet.symphone.controller.Options;
 import joel.duet.symphone.controller.Orchestra;
 import joel.duet.symphone.controller.PatchBay;
+import joel.duet.symphone.controller.ScoreController;
 import joel.duet.symphone.databinding.ActivityMainBinding;
 import joel.duet.symphone.model.CSD;
 import joel.duet.symphone.model.Default;
@@ -49,6 +50,8 @@ public class MainActivity extends AppCompatActivity {
         public ObservableBoolean polyphonicMode = new ObservableBoolean();
         public ObservableBoolean soloMode = new ObservableBoolean();
         public ObservableBoolean isMajor = new ObservableBoolean();
+        public ObservableBoolean scoreEditMode = new ObservableBoolean();
+        public ObservableBoolean patternEditMode = new ObservableBoolean();
         public MainActivity activity;
         public ActivityMainBinding binding;
 
@@ -104,6 +107,7 @@ public class MainActivity extends AppCompatActivity {
         user.polyphonicMode.set(true);
         user.soloMode.set(true);
         user.isMajor.set(false);
+        user.scoreEditMode.set(false);
 
         Orchestra.reinit(user);
         Instrument.reinit(user);
@@ -114,6 +118,7 @@ public class MainActivity extends AppCompatActivity {
         Fx.reinit(user);
         Effect.reinit(user);
         Material.reinit(user);
+        ScoreController.reinit(user);
     }
 
     @Override

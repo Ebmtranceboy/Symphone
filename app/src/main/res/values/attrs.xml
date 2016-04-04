@@ -3,4 +3,11 @@
     <declare-styleable name="joel.duet.symphone.modelview.ChordsView">
         <attr name="isMajor" format="boolean" />
     </declare-styleable>
+    <declare-styleable name="joel.duet.symphone.modelview.ScoreView">
+        <attr name="scoreEditMode" format="boolean" />
+    </declare-styleable>
+    <declare-styleable name="joel.duet.symphone.modelview.PatternView">
+        <attr name="patternEditMode" format="boolean" />
+        <attr name="loudnessMode" format="boolean" />
+    </declare-styleable>
 </resources>
