@@ -46,12 +46,13 @@ public class MainActivity extends AppCompatActivity {
         public ObservableField<String> currentEffect = new ObservableField<>();
         public ObservableField<String> currentEffectCode = new ObservableField<>();
         public ObservableBoolean pianoMode = new ObservableBoolean();
-        public ObservableBoolean loudnessMode = new ObservableBoolean();
+        public ObservableBoolean liveLoudnessMode = new ObservableBoolean();
         public ObservableBoolean polyphonicMode = new ObservableBoolean();
         public ObservableBoolean soloMode = new ObservableBoolean();
         public ObservableBoolean isMajor = new ObservableBoolean();
         public ObservableBoolean scoreEditMode = new ObservableBoolean();
         public ObservableBoolean patternEditMode = new ObservableBoolean();
+        public ObservableBoolean playLoudnessMode = new ObservableBoolean();
         public MainActivity activity;
         public ActivityMainBinding binding;
 
@@ -103,7 +104,7 @@ public class MainActivity extends AppCompatActivity {
 
         user.setCurrentViewIndex(Default.INDEX_WELCOME);
         user.pianoMode.set(true);
-        user.loudnessMode.set(false);
+        user.liveLoudnessMode.set(false);
         user.polyphonicMode.set(true);
         user.soloMode.set(true);
         user.isMajor.set(false);

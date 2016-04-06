@@ -3,13 +3,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 <data>
     <import type="android.view.View"/>
+    <import type="joel.duet.symphone.model.Default" />
     <variable name="user" type="joel.duet.symphone.MainActivity.User"/>
 </data>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:visibility="@{user.views[Default.INDEX_PATTERN].get() ? View.VISIBLE : View.INVISIBLE}">
 
         <HorizontalScrollView
             android:layout_width="wrap_content"
@@ -22,7 +24,7 @@
 
 
                 <ToggleButton
-                    android:id="@+id/mode"
+                    android:id="@+id/mode_button"
                     style="?android:attr/buttonBarButtonStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -32,10 +34,10 @@
                     android:textSize="12sp" />
 
                 <ToggleButton
-                    android:id="@+id/loudness"
+                    android:id="@+id/loudness_button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@{user.loudnessMode ? @drawable/ic_loudness_on : @drawable/ic_loudness_off}"
+                    android:background="@{user.playLoudnessMode ? @drawable/ic_loudness_on : @drawable/ic_loudness_off}"
                     android:textOff=""
                     android:textOn="" />
 
@@ -93,7 +95,7 @@
             </LinearLayout>
         </HorizontalScrollView>
 
-        <RelativeLayout
+        <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
@@ -101,14 +103,15 @@
                 android:id="@+id/pattern_view"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                app:patternEditMode="@{user.patternEditMode}"/>
+                app:patternEditMode="@{user.patternEditMode}"
+                app:playLoudnessMode="@{user.playLoudnessMode}"/>
 
             <ImageView
                 android:id="@+id/note_loudness"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:contentDescription="@string/loudness_label" />
-        </RelativeLayout>
+        </FrameLayout>
 
     </LinearLayout>
 </layout>

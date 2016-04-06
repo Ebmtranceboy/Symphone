@@ -7,7 +7,7 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.support.annotation.NonNull;
 import android.util.AttributeSet;
-//import android.util.Log;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.ScaleGestureDetector;
 import android.view.View;
@@ -24,7 +24,7 @@ import joel.duet.symphone.model.Track;
  * Created by joel on 22/01/16 at 23:26 at 23:28.
  */
 public final class PatternView extends View {
-    //private static final String TAG = "PatternView";
+    private static final String TAG = "PatternView";
     private static final Paint paint = new Paint();
     private static final float scale_height = 10.0f;
     private static final float line_height = scale_height / (float) Default.max_midi_note;
@@ -43,12 +43,9 @@ public final class PatternView extends View {
     private static int number_ticks;
     private ScaleGestureDetector mScaleDetector;
     boolean patternEditMode;
-    boolean loudnessMode;
+    boolean playLoudnessMode;
 
-    public static ImageView note_loudness;
-
-    // Absolutely NON static
-    public final Pattern pattern = Track.getPatternSelected();
+    public ImageView note_loudness;
 
     public PatternView(Context context) {
 		super(context);
@@ -64,7 +61,7 @@ public final class PatternView extends View {
 
         try {
             patternEditMode = a.getBoolean(R.styleable.joel_duet_symphone_modelview_PatternView_patternEditMode, false);
-            loudnessMode = a.getBoolean(R.styleable.joel_duet_symphone_modelview_PatternView_loudnessMode, false);
+            playLoudnessMode = a.getBoolean(R.styleable.joel_duet_symphone_modelview_PatternView_playLoudnessMode, false);
         } finally {
             a.recycle();
         }
@@ -80,8 +77,8 @@ public final class PatternView extends View {
     }
 
     @SuppressWarnings("unused")
-    public void setLoudnessMode(boolean b) {
-        loudnessMode = b;
+    public void setPlayLoudnessMode(boolean b) {
+        playLoudnessMode = b;
         invalidate();
         requestLayout();
     }
@@ -129,13 +126,14 @@ public final class PatternView extends View {
     }
 
     private int getResolution() {
-        return Default.resolutions[pattern.resolution];
+        return Default.resolutions[Track.getPatternSelected().resolution];
     }
 
     private class ScaleListener extends
             ScaleGestureDetector.SimpleOnScaleGestureListener {
         @Override
         public boolean onScale(ScaleGestureDetector detector) {
+            Pattern pattern = Track.getPatternSelected();
             if (Math.abs(detector.getCurrentSpanX()) < Math.abs(detector.getCurrentSpanY()))
                 pattern.mScaleFactorY *= detector.getScaleFactor();
             else if (Math.abs(detector.getCurrentSpanY()) < Math.abs(detector.getCurrentSpanX()))
@@ -157,6 +155,7 @@ public final class PatternView extends View {
     @Override
     public void onDraw(Canvas canvas) {
         super.onDraw(canvas);
+        Pattern pattern = Track.getPatternSelected();
         number_ticks = pattern.finish - pattern.start;
 
         width = getWidth();
@@ -248,6 +247,7 @@ public final class PatternView extends View {
         // Let the ScaleGestureDetector inspect all events.
         mScaleDetector.onTouchEvent(ev);
         note_loudness.setVisibility(INVISIBLE);
+        Pattern pattern = Track.getPatternSelected();
 
         final int action = ev.getAction();
         switch (action & MotionEvent.ACTION_MASK) {
@@ -275,19 +275,19 @@ public final class PatternView extends View {
                     }
 
                     if (!existing_note ) {
-                        if(!loudnessMode) {
+                        if(!playLoudnessMode) {
                             bar_begin = closestX(coords[0]);
                             bar_end = bar_begin;
                         }
                     } else {
-                        if(loudnessMode){
+                        if(playLoudnessMode){
                             note.loudness = note.loudness % 8 + 1;
                             note_loudness.setImageResource(Default.loudness_icons[8-note.loudness]);
                             note_loudness.setVisibility(VISIBLE);
                         } else pattern.deleteNote(note);
                     }
                     invalidate();
-                } else if(loudnessMode){
+                } else if(playLoudnessMode){
                     insertion_line = closestY(coords[1]);
                     boolean existing_note = false;
                     int n = 1;
@@ -303,8 +303,9 @@ public final class PatternView extends View {
                     if(existing_note) {
                         note_loudness.setImageResource(Default.loudness_icons[8-note.loudness]);
                         note_loudness.setVisibility(VISIBLE);
-                    }
-                }
+                        Log.i(TAG,"Should appear");
+                    } else Log.i(TAG,"Missed");
+                } else Log.i(TAG,"Dead");
 
                 mLastTouchX = x;
                 mLastTouchY = y;

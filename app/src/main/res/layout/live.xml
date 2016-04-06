@@ -63,7 +63,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:background="@{user.loudnessMode ? @drawable/ic_loudness_on : @drawable/ic_loudness_off}"
+                android:background="@{user.liveLoudnessMode ? @drawable/ic_loudness_on : @drawable/ic_loudness_off}"
                 android:textOff=""
                 android:textOn="" />
 

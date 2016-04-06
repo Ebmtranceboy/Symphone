@@ -111,7 +111,7 @@ public class Live {
         final ToggleButton loudnessButton = binding.loudness;
         loudnessButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                user.loudnessMode.set(isChecked);
+                user.liveLoudnessMode.set(isChecked);
             }
         });
 
@@ -181,6 +181,7 @@ public class Live {
 
                 activity.csoundUtil.patternize((String) select_instr.getSelectedItem(),
                         user.soloMode.get());
+                user.binding.score.scoreView.invalidate();
             }
         });
 
@@ -243,7 +244,7 @@ public class Live {
                                     csoundObj.sendScore("i\"Voicer\" 0 0 \""
                                             + select_instr.getSelectedItem() + "\" " + (id + 1) + " "
                                             + pch + " "
-                                            + (user.loudnessMode.get() ? CSD.pressure2dB(event.getPressure()) :
+                                            + (user.liveLoudnessMode.get() ? CSD.pressure2dB(event.getPressure()) :
                                             CSD.defaultLoudness2dB()) + " "
                                             + lastPch);
                                     lastPch = pch;
@@ -310,7 +311,7 @@ public class Live {
                                 csoundObj.sendScore("i\"Voicer\" 0 0 \""
                                         + select_instr.getSelectedItem() + "\" " + index + " "
                                         + pch + " "
-                                        + (user.loudnessMode.get() ? CSD.pressure2dB(event.getPressure()) :
+                                        + (user.liveLoudnessMode.get() ? CSD.pressure2dB(event.getPressure()) :
                                             CSD.defaultLoudness2dB()) + " "
                                         + lastPch);
 
@@ -321,6 +322,7 @@ public class Live {
                             chordsView.show(indexChord);
 
                             /*
+                            // TODO Basic arpeggiator:
                             List<Pattern.Note> notes = new ArrayList<>();
                             int offset = 0;
                             for(Integer key : Default.flavors[indexChord].intervals) {

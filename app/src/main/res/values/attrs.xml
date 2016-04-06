@@ -8,6 +8,6 @@
     </declare-styleable>
     <declare-styleable name="joel.duet.symphone.modelview.PatternView">
         <attr name="patternEditMode" format="boolean" />
-        <attr name="loudnessMode" format="boolean" />
+        <attr name="playLoudnessMode" format="boolean" />
     </declare-styleable>
 </resources>

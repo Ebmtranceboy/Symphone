@@ -4,8 +4,6 @@
 
     <data>
 
-        <import type="android.graphics.Color" />
-
         <variable
             name="user"
             type="joel.duet.symphone.MainActivity.User" />
@@ -97,6 +95,11 @@
             <include
                 android:id="@+id/score"
                 layout="@layout/score"
+                app:user="@{user}" />
+
+            <include
+                android:id="@+id/pattern"
+                layout="@layout/pattern"
                 app:user="@{user}" />
 
         </FrameLayout>

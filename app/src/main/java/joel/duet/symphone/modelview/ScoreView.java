@@ -19,7 +19,9 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
+import joel.duet.symphone.MainActivity;
 import joel.duet.symphone.R;
+import joel.duet.symphone.controller.PatternController;
 import joel.duet.symphone.model.CSD;
 import joel.duet.symphone.model.Default;
 import joel.duet.symphone.model.Pattern;
@@ -50,6 +52,8 @@ public final class ScoreView extends View {
     public static int tracks_displayed = Default.min_tracks_displayed;
     public static float track_height =
             (1.0f - (Default.top_margin + Default.bottom_margin)) / (float) tracks_displayed;
+
+    public static MainActivity.User user;
 
     // TODO Change positions and factors only while no bound has been reached
 
@@ -437,21 +441,8 @@ public final class ScoreView extends View {
 
                             } else {
                                 Focus.save();
-                                /*
-                                FragmentManager fragmentManager = ScoreFragment.activity.getSupportFragmentManager();
-
-                                Bundle bundle = new Bundle();
-                                bundle.putInt("resolution_index", Track.getPatternSelected().resolution);
-                                bundle.putString("instr_name", Track.getPatternSelected().getInstr());
-                                PatternFragment fragment = new PatternFragment();
-                                fragment.setArguments(bundle);
-                                fragmentManager.beginTransaction().replace(R.id.mainFrame,
-                                        fragment,
-                                        "Pattern").commit();
-                                String format = getResources().getString(R.string.pattern_title);
-                                MainActivity.toolbar.setTitle(String.format(format, Score.getIdTrackSelected(), Track.getIdPatternSelected()));
-                                MainActivity.currentFragment = MainActivity.State.Pattern;
-                                */
+                                PatternController.reinit(user);
+                                user.setCurrentViewIndex(Default.INDEX_PATTERN);
                             }
                         }
                     } else {

@@ -36,6 +36,7 @@ public class ScoreController {
         activity = user.activity;
         csoundObj = MainActivity.csoundObj;
         scoreview = user.binding.score.scoreView;
+        ScoreView.user = user;
 
         user.binding.score.modeButton.setOnClickListener(new View.OnClickListener() {
             @Override
