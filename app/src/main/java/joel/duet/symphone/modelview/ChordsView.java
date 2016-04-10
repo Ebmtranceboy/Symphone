@@ -31,7 +31,7 @@ public class ChordsView extends View {
     private static Pair<Float, Float> offsetText;
     private static Pair<Float, Float> offsetTouch;
     private static Pair<Float, Float> offsetGrid;
-    boolean isMajor;
+    private boolean isMajor;
 
     public ChordsView(Context context) {
         super(context);

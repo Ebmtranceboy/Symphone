@@ -20,13 +20,18 @@ public class Instrument {
             @Override
             public void onClick(View view) {
 
+                final String instrName = user.currentInstrument.get();
                 MainActivity.sensible_code = new Runnable() {
                     @Override
                     public void run() {
                         Matrix.getInstance().spy();
-                        CSD.instruments.remove(user.currentInstrument.get());
+                        CSD.instruments.remove(instrName);
                         Matrix.getInstance().update();
                         Orchestra.reinit(user);
+
+                        user.activity.listInstr.remove(instrName);
+                        user.activity.instr_adapter.notifyDataSetChanged();
+
                         PatchBay.reinit(user);
                         Master.reinit(user);
 

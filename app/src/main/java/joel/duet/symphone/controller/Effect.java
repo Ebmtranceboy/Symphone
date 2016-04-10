@@ -18,13 +18,17 @@ public class Effect {
             @Override
             public void onClick(View view) {
 
+                final String effectName = user.currentEffect.get();
                 MainActivity.sensible_code = new Runnable() {
                     @Override
                     public void run() {
                         Matrix.getInstance().spy();
-                        CSD.effects.remove(user.currentEffect.get());
+                        CSD.effects.remove(effectName);
                         Matrix.getInstance().update();
-                        Fx.reinit(user);
+
+                        user.activity.listEffect.remove(effectName);
+                        user.activity.effect_adapter.notifyDataSetChanged();
+
                         PatchBay.reinit(user);
                         Master.reinit(user);
 

@@ -3,15 +3,13 @@ package joel.duet.symphone.controller;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.ToggleButton;
 
 import com.csounds.CsoundObj;
 
-import java.util.LinkedList;
-
+import joel.duet.symphone.InputTextDialogFragment;
 import joel.duet.symphone.MainActivity;
 import joel.duet.symphone.SimpleImageArrayAdapter;
 import joel.duet.symphone.model.CSD;
@@ -26,7 +24,6 @@ import joel.duet.symphone.modelview.PatternView;
  */
 public class PatternController {
     private static PatternView patternview;
-    private static final LinkedList<String> instrumentIds = new LinkedList<>();
     private static final String TAG = "PatternFragment";
 
     private static MainActivity activity;
@@ -46,13 +43,6 @@ public class PatternController {
             }
         });
 
-        /*final ToggleButton loudnessButton = user.binding.pattern.loudnessButton;
-        loudnessButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                user.liveLoudnessMode.set(isChecked);
-            }
-        });*/
-
         final ToggleButton loudnessButton = user.binding.pattern.loudnessButton;
         loudnessButton.setOnClickListener(new View.OnClickListener()
         {
@@ -62,15 +52,8 @@ public class PatternController {
             }
         });
 
-        for (String instr : CSD.instruments.getSet()) instrumentIds.add(instr);
-
-        final ArrayAdapter<String> instruments_adapter =
-                new ArrayAdapter<>(user.activity,
-                        android.R.layout.simple_spinner_item,
-                        instrumentIds);
-
         final Spinner instrument_spinner = user.binding.pattern.instrument;
-        instrument_spinner.setAdapter(instruments_adapter);
+        instrument_spinner.setAdapter(user.activity.instr_adapter);
         instrument_spinner.setOnItemSelectedListener(
                 new AdapterView.OnItemSelectedListener() {
                     @Override
@@ -86,13 +69,9 @@ public class PatternController {
         arpeggio_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                /*
                 InputTextDialogFragment commandLabDialog = new InputTextDialogFragment();
-                Bundle bundle = new Bundle();
-                bundle.putString("state", "Pattern");
-                commandLabDialog.setArguments(bundle);
+                commandLabDialog.caller = patternview;
                 commandLabDialog.show(user.activity.getSupportFragmentManager(), "fragment_command_lab");
-                */
             }
         });
 

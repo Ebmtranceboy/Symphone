@@ -41,7 +41,7 @@ public final class ScoreView extends View {
     private static final float[] coords = new float[2];
     private static final Matrix mMatrix = new Matrix();
     private static final Matrix mInverse = new Matrix();
-    boolean scoreEditMode;
+    private boolean scoreEditMode;
 
     public static Tool tool;
     private static int bar_begin = -1;

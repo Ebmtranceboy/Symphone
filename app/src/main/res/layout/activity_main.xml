@@ -43,11 +43,6 @@
                 app:user="@{user}" />
 
             <include
-                android:id="@+id/instrument_name_provider"
-                layout="@layout/instrument_name_provider"
-                app:user="@{user}" />
-
-            <include
                 android:id="@+id/instrument"
                 layout="@layout/instrument"
                 app:user="@{user}" />
@@ -75,11 +70,6 @@
             <include
                 android:id="@+id/fx"
                 layout="@layout/fx"
-                app:user="@{user}" />
-
-            <include
-                android:id="@+id/effect_name_provider"
-                layout="@layout/effect_name_provider"
                 app:user="@{user}" />
 
             <include

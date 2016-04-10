@@ -71,7 +71,7 @@ public class Live {
         if(CSD.instruments.size()>0) doReinit(user);
     }
 
-    public static void doReinit(final MainActivity.User user) {
+    private static void doReinit(final MainActivity.User user) {
         activity = user.activity;
         csoundObj = MainActivity.csoundObj;
         csoundObj.stop();
@@ -96,10 +96,7 @@ public class Live {
 
         // populate instr spinner
         final Spinner select_instr = binding.selectInstr;
-        final ArrayAdapter<String> instr_adapter =
-                new ArrayAdapter<>(activity.getBaseContext(),
-                        android.R.layout.simple_spinner_item, CSD.instruments.getArray());
-        select_instr.setAdapter(instr_adapter);
+        select_instr.setAdapter(user.activity.instr_adapter);
 
         final ToggleButton keyboadButton = binding.pianoMode;
         keyboadButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {

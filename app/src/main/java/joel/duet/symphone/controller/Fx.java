@@ -4,13 +4,11 @@ import android.os.Environment;
 import android.view.ContextThemeWrapper;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.regex.Matcher;
 
+import joel.duet.symphone.InputTextDialogFragment;
 import joel.duet.symphone.MainActivity;
 import joel.duet.symphone.R;
 import joel.duet.symphone.SimpleFileDialog;
@@ -30,49 +28,18 @@ public class Fx {
         user.binding.fx.newEffectButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                user.setCurrentViewIndex(Default.INDEX_GIVE_EFFECT_NAME);
+                InputTextDialogFragment newEffectDialog = new InputTextDialogFragment();
+                newEffectDialog.caller = new Call(user);
+                newEffectDialog.show(user.activity.getSupportFragmentManager(), "fragment_new_effect");
             }
         });
 
-        user.binding.effectNameProvider.cancelButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                user.setCurrentViewIndex(Default.INDEX_FX);
-            }
-        });
-
-        final List<String> listEffect = new ArrayList<>();
-        listEffect.addAll(CSD.effects.getSet());
-        final ArrayAdapter<String> effect_adapter =
-                new ArrayAdapter<>(user.activity,
-                        android.R.layout.simple_spinner_item, listEffect);
-        user.binding.fx.listEffectView.setAdapter(effect_adapter);
-
-        user.binding.effectNameProvider.okButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String effectName = user.binding.effectNameProvider.nameEdited.getText().toString();
-                Matrix.getInstance().spy();
-                CSD.effects.put(effectName, new CSD.Content("ain1, ain2 xin\n"
-                        + "\nxout ain1, ain2\n", 1.0, 1.0));
-                Matrix.getInstance().update();
-                PatchBay.reinit(user);
-                Master.reinit(user);
-
-                listEffect.add(effectName);
-                effect_adapter.notifyDataSetChanged();
-
-                user.currentEffect.set(effectName);
-                user.currentEffectCode.set(CSD.effects.get(effectName).code);
-
-                user.setCurrentViewIndex(Default.INDEX_EFFECT);
-            }
-        });
+        user.binding.fx.listEffectView.setAdapter(user.activity.effect_adapter);
 
         user.binding.fx.listEffectView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                String effectName = listEffect.get(i);
+                String effectName = user.activity.listEffect.get(i);
                 user.currentEffect.set(effectName);
                 user.currentEffectCode.set(CSD.effects.get(effectName).code);
 
@@ -111,7 +78,8 @@ public class Fx {
             Matrix.getInstance().spy();
             CSD.effects.put(effectName, new CSD.Content(effect.body, 1.0, 1.0));
             Matrix.getInstance().update();
-            Fx.reinit(user);
+            user.activity.listEffect.add(effectName);
+            user.activity.effect_adapter.notifyDataSetChanged();
             PatchBay.reinit(user);
             Master.reinit(user);
         }
@@ -144,6 +112,32 @@ public class Fx {
                 else body += lines[i] + "\n";
                 i++;
             }
+        }
+    }
+
+    static class Call implements InputTextDialogFragment.EditNameDialogListener {
+        final MainActivity.User user;
+
+        Call(MainActivity.User aUser) {
+            user = aUser;
+        }
+
+        @Override
+        public void onFinishEditDialog(String effectName) {
+            Matrix.getInstance().spy();
+            CSD.effects.put(effectName, new CSD.Content("ain1, ain2 xin\n"
+                    + "\nxout ain1, ain2\n", 1.0, 1.0));
+            Matrix.getInstance().update();
+            PatchBay.reinit(user);
+            Master.reinit(user);
+
+            user.activity.listEffect.add(effectName);
+            user.activity.effect_adapter.notifyDataSetChanged();
+
+            user.currentEffect.set(effectName);
+            user.currentEffectCode.set(CSD.effects.get(effectName).code);
+
+            user.setCurrentViewIndex(Default.INDEX_EFFECT);
         }
     }
 

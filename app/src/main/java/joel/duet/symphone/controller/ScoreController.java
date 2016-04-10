@@ -29,7 +29,7 @@ public class ScoreController {
 
     private static ScoreView scoreview;
     private static ArrayAdapter<Integer> bars_adapter;
-    public static MainActivity activity;
+    private static MainActivity activity;
     private static CsoundObj csoundObj;
 
     public static void reinit(final MainActivity.User user) {

@@ -7,13 +7,14 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.support.annotation.NonNull;
 import android.util.AttributeSet;
-import android.util.Log;
+//import android.util.Log;
 import android.view.MotionEvent;
 import android.view.ScaleGestureDetector;
 import android.view.View;
 import android.graphics.Matrix;
 import android.widget.ImageView;
 
+import joel.duet.symphone.InputTextDialogFragment;
 import joel.duet.symphone.R;
 import joel.duet.symphone.model.Default;
 import joel.duet.symphone.model.Pattern;
@@ -23,8 +24,8 @@ import joel.duet.symphone.model.Track;
  *
  * Created by joel on 22/01/16 at 23:26 at 23:28.
  */
-public final class PatternView extends View {
-    private static final String TAG = "PatternView";
+public final class PatternView extends View implements InputTextDialogFragment.EditNameDialogListener{
+    //private static final String TAG = "PatternView";
     private static final Paint paint = new Paint();
     private static final float scale_height = 10.0f;
     private static final float line_height = scale_height / (float) Default.max_midi_note;
@@ -42,8 +43,8 @@ public final class PatternView extends View {
     private static int height;
     private static int number_ticks;
     private ScaleGestureDetector mScaleDetector;
-    boolean patternEditMode;
-    boolean playLoudnessMode;
+    private boolean patternEditMode;
+    private boolean playLoudnessMode;
 
     public ImageView note_loudness;
 
@@ -303,9 +304,8 @@ public final class PatternView extends View {
                     if(existing_note) {
                         note_loudness.setImageResource(Default.loudness_icons[8-note.loudness]);
                         note_loudness.setVisibility(VISIBLE);
-                        Log.i(TAG,"Should appear");
-                    } else Log.i(TAG,"Missed");
-                } else Log.i(TAG,"Dead");
+                    }
+                }
 
                 mLastTouchX = x;
                 mLastTouchY = y;
@@ -420,4 +420,42 @@ public final class PatternView extends View {
                     , paint);
         }
     }
+
+    @Override
+    public void onFinishEditDialog(String inputText) {
+        String[] command = inputText.split(" +");
+        Pattern pattern = Track.getPatternSelected();
+        int n = Track.getPatternSelected().getNbOfNotes();
+        int period = pattern.getNote(n - 1).onset + pattern.getNote(n - 1).duration;
+
+        if(command[0].equals("repeat")){
+            boolean roomLeft = true;
+            int mark = period;
+
+            while(roomLeft){
+                for(int i=0; i<n; i++) {
+                    Pattern.Note note = pattern.getNote(i);
+                    if (mark + note.onset + note.duration <
+                            pattern.finish - pattern.start)
+                        pattern.createNote(
+                                mark + note.onset,
+                                note.duration,
+                                note.pitch,
+                                note.loudness);
+                    else roomLeft = false;
+                }
+                if(roomLeft) mark += period;
+            }
+        } else if(command[0].equals("transpose")){
+            try {
+                int delta = Integer.parseInt(command[1]);
+                for (int i = 0; i < n; i++) {
+                    Pattern.Note note = pattern.getNote(i);
+                    note.pitch += delta;
+                }
+            } catch (NumberFormatException exp){exp.printStackTrace();}
+        }
+        invalidate();
+    }
+
 }

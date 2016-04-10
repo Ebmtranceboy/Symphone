@@ -11,9 +11,13 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.csounds.CsoundObj;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import joel.duet.symphone.controller.Effect;
 import joel.duet.symphone.controller.Fx;
@@ -33,26 +37,31 @@ import joel.duet.symphone.model.PreferenceManager;
 
 public class MainActivity extends AppCompatActivity {
     //private static final String TAG = "MainActivity";
-    final User user = new User();
+    private final User user = new User();
     public static CsoundObj csoundObj = new CsoundObj(false, true);
     public final CsoundUtil csoundUtil = new CsoundUtil(this);
     public static Runnable sensible_code;
+    public final List<String> listInstr = new ArrayList<>();
+    public ArrayAdapter<String> instr_adapter;
+    public final List<String> listEffect = new ArrayList<>();
+    public ArrayAdapter<String> effect_adapter;
+
 
     public class User {
-        public ObservableInt currentViewIndex = new ObservableInt();
-        public ObservableBoolean views[] = new ObservableBoolean[Default.nViews];
-        public ObservableField<String> currentInstrument = new ObservableField<>();
-        public ObservableField<String> currentInstrumentCode = new ObservableField<>();
-        public ObservableField<String> currentEffect = new ObservableField<>();
-        public ObservableField<String> currentEffectCode = new ObservableField<>();
-        public ObservableBoolean pianoMode = new ObservableBoolean();
-        public ObservableBoolean liveLoudnessMode = new ObservableBoolean();
-        public ObservableBoolean polyphonicMode = new ObservableBoolean();
-        public ObservableBoolean soloMode = new ObservableBoolean();
-        public ObservableBoolean isMajor = new ObservableBoolean();
-        public ObservableBoolean scoreEditMode = new ObservableBoolean();
-        public ObservableBoolean patternEditMode = new ObservableBoolean();
-        public ObservableBoolean playLoudnessMode = new ObservableBoolean();
+        public final ObservableInt currentViewIndex = new ObservableInt();
+        public final ObservableBoolean[] views = new ObservableBoolean[Default.nViews];
+        public final ObservableField<String> currentInstrument = new ObservableField<>();
+        public final ObservableField<String> currentInstrumentCode = new ObservableField<>();
+        public final ObservableField<String> currentEffect = new ObservableField<>();
+        public final ObservableField<String> currentEffectCode = new ObservableField<>();
+        public final ObservableBoolean pianoMode = new ObservableBoolean();
+        public final ObservableBoolean liveLoudnessMode = new ObservableBoolean();
+        public final ObservableBoolean polyphonicMode = new ObservableBoolean();
+        public final ObservableBoolean soloMode = new ObservableBoolean();
+        public final ObservableBoolean isMajor = new ObservableBoolean();
+        public final ObservableBoolean scoreEditMode = new ObservableBoolean();
+        public final ObservableBoolean patternEditMode = new ObservableBoolean();
+        public final ObservableBoolean playLoudnessMode = new ObservableBoolean();
         public MainActivity activity;
         public ActivityMainBinding binding;
 
@@ -101,6 +110,13 @@ public class MainActivity extends AppCompatActivity {
         PreferenceManager.getInstance().initialize(this);
         Matrix.getInstance().spy();
         Matrix.getInstance().update();
+
+        listInstr.addAll(CSD.instruments.getSet());
+        instr_adapter = new ArrayAdapter<>(this,
+                android.R.layout.simple_spinner_item, listInstr);
+        listEffect.addAll(CSD.effects.getSet());
+        effect_adapter = new ArrayAdapter<>(this,
+                android.R.layout.simple_spinner_item, listEffect);
 
         user.setCurrentViewIndex(Default.INDEX_WELCOME);
         user.pianoMode.set(true);
