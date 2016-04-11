@@ -52,7 +52,7 @@ public class PatternController {
             }
         });
 
-        final Spinner instrument_spinner = user.binding.pattern.instrument;
+        final Spinner instrument_spinner = user.binding.pattern.patternInstrument;
         instrument_spinner.setAdapter(user.activity.instr_adapter);
         instrument_spinner.setOnItemSelectedListener(
                 new AdapterView.OnItemSelectedListener() {

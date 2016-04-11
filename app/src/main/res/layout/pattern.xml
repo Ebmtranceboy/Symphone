@@ -42,7 +42,7 @@
                     android:textOn="" />
 
                 <Spinner
-                    android:id="@+id/instrument"
+                    android:id="@+id/pattern_instrument"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
 
