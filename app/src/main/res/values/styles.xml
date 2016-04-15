@@ -1,12 +1,14 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat">
+    <style name="AppTheme.NoActionBar" parent="Theme.AppCompat.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
-    </style>
+        <item name="android:windowActionBar">false</item>
+        <item name="android:windowNoTitle">true</item>
+</style>
 
     <style name="csoundAlertDialogStyle" parent="@android:style/Theme.Dialog">
         <item name="android:textSize">20sp</item>

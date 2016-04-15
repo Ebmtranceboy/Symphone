@@ -14,7 +14,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:id="@+id/layout"
         android:visibility="@{user.views[Default.INDEX_INSTRUMENT].get() ? View.VISIBLE : View.INVISIBLE}">
 
         <TextView

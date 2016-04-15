@@ -87,19 +87,10 @@ public final class CSD {
     public static final Corpus effects = new Corpus();
     public static final Corpus instruments = new Corpus();
 
-    /*
-    static final Map<String, Content> mapInstr = new LinkedHashMap<>();//new HashMap<>();
-
-    static int getNbInstruments() {
-        return mapInstr.keySet().size();
-    }
-*/
-    @SuppressWarnings("unused")
     public static String formatInstrumentHeader(String instrName){
         return String.format("instr %1$s", instrName);
     }
 
-    @SuppressWarnings("unused")
     public static String formatEffectHeader(String effectName){
         return String.format("opcode %1$s, aa, aa", effectName);
     }

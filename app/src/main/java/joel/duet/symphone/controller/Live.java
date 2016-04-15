@@ -182,7 +182,7 @@ public class Live {
             }
         });
 
-        binding.stop.setOnClickListener(new View.OnClickListener() {
+        binding.stopLive.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 recordButton.setImageResource(R.drawable.ic_menu_live);

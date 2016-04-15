@@ -38,7 +38,7 @@ public class ScoreController {
         scoreview = user.binding.score.scoreView;
         ScoreView.user = user;
 
-        user.binding.score.modeButton.setOnClickListener(new View.OnClickListener() {
+        user.binding.score.modeButtonScore.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 user.scoreEditMode.set(!user.scoreEditMode.get());
@@ -128,7 +128,7 @@ public class ScoreController {
             }
         });
 
-        final Spinner resolution_spinner = user.binding.score.resolution;
+        final Spinner resolution_spinner = user.binding.score.resolutionScore;
         SimpleImageArrayAdapter adapter =
                 new SimpleImageArrayAdapter(user.activity, Default.resolution_icons);
         resolution_spinner.setAdapter(adapter);
@@ -194,7 +194,7 @@ public class ScoreController {
                                                    }
         );
 
-        user.binding.score.stop.setOnClickListener(new View.OnClickListener() {
+        user.binding.score.stopScore.setOnClickListener(new View.OnClickListener() {
                                                             @Override
                                                             public void onClick(View view) {
                                                                 csoundObj.stop();

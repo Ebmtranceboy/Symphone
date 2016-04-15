@@ -34,7 +34,7 @@ public class PatternController {
         csoundObj = MainActivity.csoundObj;
 
         final ImageButton arpeggio_button = user.binding.pattern.arpeggio;
-        final ToggleButton mode_button = user.binding.pattern.modeButton;
+        final ToggleButton mode_button = user.binding.pattern.modeButtonPattern;
 
         mode_button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -84,7 +84,7 @@ public class PatternController {
             }
         });
 
-        final Spinner resolution_spinner = user.binding.pattern.resolution;
+        final Spinner resolution_spinner = user.binding.pattern.resolutionPattern;
         SimpleImageArrayAdapter adapter =
                 new SimpleImageArrayAdapter(user.activity, Default.resolution_icons);
         resolution_spinner.setAdapter(adapter);
@@ -128,7 +128,7 @@ public class PatternController {
         });
 
 
-        user.binding.pattern.stop.setOnClickListener(new View.OnClickListener() {
+        user.binding.pattern.stopPattern.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 csoundObj.stop();

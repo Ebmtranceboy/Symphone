@@ -4,7 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
-import android.util.Log;
+//import android.util.Log;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -17,7 +17,7 @@ import joel.duet.symphone.modelview.ScoreView;
  * Created by joel on 04/02/16 at 23:19 at 23:21 at 20:23 at 23:57.
  */
 public final class PreferenceManager {
-    private static final String TAG = "PreferenceManager";
+    //private static final String TAG = "PreferenceManager";
 
     private static PreferenceManager self;
     private SharedPreferences preferences = null;
@@ -102,7 +102,7 @@ public final class PreferenceManager {
             }
         };
         TransportTask.execute(task);
-     }
+    }
 
     public static void resetProject() {
         CSD.instruments.clear();
@@ -147,7 +147,7 @@ public final class PreferenceManager {
     }
 
     public static void loadProject(JSONObject project) throws JSONException {
-        Log.d(TAG, project.toString());
+        //Log.d(TAG, project.toString());
         loadJSONOrchestra(project.getJSONArray(ORCHESTRA_KEY));
         loadJSONFX(project.getJSONArray(FX_KEY));
         loadJSONTracks(project.getJSONObject(TRACKS_KEY));

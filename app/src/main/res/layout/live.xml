@@ -133,7 +133,7 @@
                 android:src="@drawable/ic_menu_score" />
 
             <ImageButton
-                android:id="@+id/stop"
+                android:id="@+id/stop_live"
                 style="?android:attr/buttonBarButtonStyle"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"

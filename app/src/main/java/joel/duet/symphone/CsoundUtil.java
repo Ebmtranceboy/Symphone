@@ -57,6 +57,7 @@ public final class CsoundUtil {
         context = ctx;
     }
 
+    @SuppressWarnings("unused")
     protected String getResourceFileAsString(int resId) {
         StringBuilder str = new StringBuilder();
 
